@@ -17,6 +17,8 @@ RUN mkdir -p /tmp/voikko && \
     make \
     && make install
 
+RUN ln -sv ${VOIKKO_PREFIX}/lib/libvoikko.so /usr/lib/libvoikko.so
+
 ENV SBT_VERSION 0.13.11
 ENV SBT_HOME /usr/local/sbt
 ENV PATH ${PATH}:${SBT_HOME}/bin
