@@ -8,17 +8,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV VOIKKO_PREFIX /usr/local/voikko
 ENV VOIKKO_VERSION 3.7.1
-
+    
 RUN mkdir -p /tmp/voikko && \
     cd /tmp/voikko && \
-    curl -O "http://www.puimula.org/voikko-sources/libvoikko/libvoikko-${VOIKKO_VERSION}.tar.gz" && \
-    tar -xzf libvoikko-${VOIKKO_VERSION}.tar.gz && \
+    curl -sL "http://www.puimula.org/voikko-sources/libvoikko/libvoikko-${VOIKKO_VERSION}.tar.gz" \
+      | gunzip | tar -x -C /tmp/voikko && \
     cd libvoikko-${VOIKKO_VERSION} && \
-    ./configure --prefix ${VOIKKO_PREFIX} && \
+    ./configure --prefix ${VOIKKO_PREFIX} --with-dictionary-path=${VOIKKO_DICTS} && \
     make \
     && make install
 
 RUN ln -sv ${VOIKKO_PREFIX}/lib/libvoikko.so /usr/lib/libvoikko.so
+RUN ldconfig
 
 ENV SBT_VERSION 0.13.11
 ENV SBT_HOME /usr/local/sbt
