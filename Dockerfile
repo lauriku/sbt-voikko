@@ -4,6 +4,7 @@ MAINTAINER Lauri Kuittinen <lauri.kuittinen@gofore.com>
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
       libmalaga-dev \
+      execstack \
     && rm -rf /var/lib/apt/lists/*
 
 ENV VOIKKO_PREFIX /usr/local/voikko
@@ -18,6 +19,7 @@ RUN mkdir -p /tmp/voikko && \
     make \
     && make install
 
+RUN execstack -c ${VOIKKO_PREFIX}/lib/libvoikko.so
 RUN ln -sv ${VOIKKO_PREFIX}/lib/libvoikko.so /usr/lib/libvoikko.so
 RUN ldconfig
 
