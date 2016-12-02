@@ -3,6 +3,7 @@ MAINTAINER Lauri Kuittinen <lauri.kuittinen@gofore.com>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential \
+      libmalaga-dev \
     && rm -rf /var/lib/apt/lists/*
 
 ENV VOIKKO_PREFIX /usr/local/voikko
