@@ -19,6 +19,8 @@ RUN mkdir -p /tmp/voikko && \
     make \
     && make install
 
+RUN rm -rf /tmp/voikko
+
 RUN execstack -c ${VOIKKO_PREFIX}/lib/libvoikko.so
 RUN ln -sv ${VOIKKO_PREFIX}/lib/libvoikko.so /usr/lib/libvoikko.so
 RUN ldconfig
