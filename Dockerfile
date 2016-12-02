@@ -12,7 +12,7 @@ ENV VOIKKO_VERSION 3.7.1
 RUN mkdir -p /tmp/voikko && \
     cd /tmp/voikko && \
     curl -sL "http://www.puimula.org/voikko-sources/libvoikko/libvoikko-${VOIKKO_VERSION}.tar.gz" \
-      | gunzip | tar -x -C /tmp/voikko && \
+    | gunzip | tar -x -C /tmp/voikko && \
     cd libvoikko-${VOIKKO_VERSION} && \
     ./configure --prefix ${VOIKKO_PREFIX} --with-dictionary-path=${VOIKKO_DICTS} && \
     make \
